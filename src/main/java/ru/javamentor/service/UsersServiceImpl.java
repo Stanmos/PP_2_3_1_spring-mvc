@@ -2,12 +2,14 @@ package ru.javamentor.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.javamentor.dao.UserDao;
 import ru.javamentor.model.User;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UsersServiceImpl implements UsersService {
 
     @Autowired
@@ -19,6 +21,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getUsers() {
         return userDao.getUsers();
     }
@@ -34,6 +37,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getUserById(int id) {
         return userDao.getUserById(id);
     }
